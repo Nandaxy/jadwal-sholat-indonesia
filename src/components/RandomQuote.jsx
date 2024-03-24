@@ -9,6 +9,9 @@ const RandomQuote = () => {
       "Jangan pernah menyerah pada mimpi-mimpi Anda.",
       "Lakukan yang terbaik dan biarkan Tuhan yang menentukan.",
       "Setiap hari adalah kesempatan baru untuk menjadi lebih baik dari sebelumnya.",
+      "Dan janganlah kamu mendekati zina, sesungguhnya zina adalah suatu perbuatan yang keji. Dan suatu jalan yang buruk.",
+      "Sesungguhnya kami adalah milik Allah, dan sesungguhnya kepada-Nya kami akan kembali.",
+      "Sesungguhnya sholat itu mencegah dari perbuatan-perbuatan keji dan munkar",
     ];
 
     const randomIndex = Math.floor(Math.random() * quotes.length);

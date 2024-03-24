@@ -6,12 +6,12 @@ import Header from "./components/Header";
 
 const App = () => {
   const [city, setCity] = useState("");
-
-  useEffect(() => {
-    if (!city) {
+  
+useEffect(() => {
+    if (!localStorage.getItem("userCity")) {
       setCity("cirebon");
     }
-  }, [city]);
+  }, []);
   // console.log(city);
   const updateCity = (newCity) => {
     setCity(newCity);

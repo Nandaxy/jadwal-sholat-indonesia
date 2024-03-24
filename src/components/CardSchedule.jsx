@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import Countdown from "./Coundown";
+import Countdown from "./Countdown";
 
 import Moon from "../assets/icon/moon";
 import Moon2 from "../assets/icon/moon2";
