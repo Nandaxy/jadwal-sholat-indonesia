@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CardSchedule from "./components/CardSchedule";
 import SelectLocate from "./components/SelectLocate";
 import Hero from "./components/Hero";
@@ -6,6 +6,12 @@ import Header from "./components/Header";
 
 const App = () => {
   const [city, setCity] = useState("");
+
+  useEffect(() => {
+    if (!city) {
+      setCity("cirebon");
+    }
+  }, [city]);
   // console.log(city);
   const updateCity = (newCity) => {
     setCity(newCity);
