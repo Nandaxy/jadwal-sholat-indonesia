@@ -24,6 +24,7 @@ const CardSchedule = ({ city }) => {
     setCurrentDateIndex(tanggal - 1);
   }, []);
 
+
   useEffect(() => {
     const fetchPrayerSchedule = async () => {
       try {
@@ -48,14 +49,24 @@ const CardSchedule = ({ city }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [city]);
+  
 
-  const findUpcomingPrayer = (dailySchedule) => {
-    if (dailySchedule) {
-      const now = new Date();
-      const currentTime = now.getHours() * 60 + now.getMinutes();
 
+const findUpcomingPrayer = (dailySchedule) => {
+  if (dailySchedule) {
+    const now = new Date();
+    const currentTime = now.getHours() * 60 + now.getMinutes();
+
+    const isyaTime = dailySchedule.isya.split(":").map(Number);
+    const isyaTimeInMinutes = isyaTime[0] * 60 + isyaTime[1];
+
+    if (currentTime > isyaTimeInMinutes) {
+      const nextDayIndex = currentDateIndex === prayerSchedule.length - 1 ? 0 : currentDateIndex + 1;
+      setUpcomingPrayer("imsak");
+      setUpcomingPrayerTime(prayerSchedule[nextDayIndex].imsyak);
+      // console.log(upcomingPrayer)
+    } else {
       const nextPrayer = Object.entries(dailySchedule).find(
-        // eslint-disable-next-line no-unused-vars
         ([prayerName, prayerTime]) => {
           const [hours, minutes] = prayerTime.split(":").map(Number);
           const prayerTimeInMinutes = hours * 60 + minutes;
@@ -68,7 +79,14 @@ const CardSchedule = ({ city }) => {
         setUpcomingPrayerTime(nextPrayer[1]);
       }
     }
-  };
+  }
+};
+
+useEffect(() => {
+  findUpcomingPrayer(prayerSchedule[currentDateIndex]);
+}, [prayerSchedule, currentDateIndex]);
+
+
 
   const goToPreviousDay = () => {
     if (currentDateIndex > 0) {

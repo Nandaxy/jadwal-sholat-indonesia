@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import RandomQuote from "./RandomQuote";
 
@@ -25,10 +24,30 @@ const Countdown = ({ name, time }) => {
     const currentTime = new Date().getTime();
     const [hours, minutes] = targetTime.split(":").map(Number);
     const targetDate = new Date();
+    
+    if (name === "imsak" && checkIfNextDayIsya()) {
+      targetDate.setDate(targetDate.getDate() + 1); 
+    }
+    
     targetDate.setHours(hours, minutes, 0, 0);
     const targetTimestamp = targetDate.getTime();
 
     return Math.max(0, targetTimestamp - currentTime);
+  }
+
+  function checkIfNextDayIsya() {
+    const currentTime = new Date();
+    const currentHours = currentTime.getHours();
+    const currentMinutes = currentTime.getMinutes();
+
+
+    const [isyaHours, isyaMinutes] = time.split(":").map(Number);
+
+    if (currentHours > isyaHours || (currentHours === isyaHours && currentMinutes > isyaMinutes)) {
+      return true;
+    }
+
+    return false;
   }
 
   function formatTime(milliseconds) {
