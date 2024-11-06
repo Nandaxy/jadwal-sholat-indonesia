@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import Countdown from "./Countdown";
@@ -10,6 +11,7 @@ import Sun2 from "../assets/icon/sun2";
 import Sun3 from "../assets/icon/sun3";
 import Sunset from "../assets/icon/sunset";
 import Moon3 from "../assets/icon/moon3";
+import { getSchedule } from "../lib/getSchedule";
 
 const CardSchedule = ({ city }) => {
   const [prayerSchedule, setPrayerSchedule] = useState([]);
@@ -28,12 +30,10 @@ const CardSchedule = ({ city }) => {
   useEffect(() => {
     const fetchPrayerSchedule = async () => {
       try {
-        const response = await fetch(
-          `https://my-api-tau.vercel.app/api/islami/jadwal-sholat?kota=${city}`
-        );
-        const data = await response.json();
-        if (data.status && data.result) {
-          setPrayerSchedule(data.result);
+        const data = await getSchedule(city)
+    
+        if (data) {
+          setPrayerSchedule(data);
           setLoading(false);
           findUpcomingPrayer(data.result[currentDateIndex]);
         } else {
@@ -114,7 +114,7 @@ useEffect(() => {
         <>
           <div className="bg-white p-4 rounded-lg shadow-md min-w-80 mb-4">
             <p className="text-gray-800 font-semibold text-center">
-              Date: {formatDate(prayerSchedule[currentDateIndex].tanggal)}
+              Tanggal : {formatDate(prayerSchedule[currentDateIndex].tanggal)}
             </p>
 
             <div className=" px-2 py-3 border rounded-md mt-4 space-y-2">

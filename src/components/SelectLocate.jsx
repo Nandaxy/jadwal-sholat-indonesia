@@ -10,11 +10,11 @@ const SelectLocate = ({ city, updateCity }) => {
     const fetchCities = async () => {
       try {
         const response = await fetch(
-          "https://my-api-tau.vercel.app/api/islami/kota-jadwal-sholat"
+          "https://raw.githubusercontent.com/lakuapik/jadwalsholatorg/master/kota.json"
         );
         if (response.ok) {
           const data = await response.json();
-          setCities(data.result);
+          setCities(data);
         } else {
           throw new Error("Failed to fetch data");
         }

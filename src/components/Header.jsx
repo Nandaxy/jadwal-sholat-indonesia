@@ -22,12 +22,12 @@ const Header = ({ city, updateCity }) => {
         .then((response) => response.json())
         .then((data) => {
           const countyName = data.address.county;
-          fetch("https://my-api-tau.vercel.app/api/islami/kota-jadwal-sholat")
+          fetch("https://raw.githubusercontent.com/lakuapik/jadwalsholatorg/master/kota.json")
             .then((response) => response.json())
             .then((result) => {
               if (
-                result.status &&
-                result.result.includes(countyName.toLowerCase())
+              
+                result.includes(countyName.toLowerCase())
               ) {
                 localStorage.setItem("userCity", countyName);
                 setLocalCity(countyName);
